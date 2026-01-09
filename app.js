@@ -1,0 +1,416 @@
+// Artwork data
+const artworks = [
+    {
+        id: 1,
+        title: "Kintsugi",
+        year: 2024,
+	    medium: "Oil on canvas",
+        dimensions: "110 x 70 cm",
+        description:"Kintsugi is based on an original 3D model that served as a starting point for spatial and formal thinking.The digital structure was not conceived as a final solution, but as an inspirational framework, gradually transformed through the process of painting.The aim was not precision, but the amplification of optical spatial effect — allowing the form to almost step out of the picture plane.Throughout the painterly process, irregularity is not treated as an error, but as a consciously preserved element.",
+        images: ["https://cdnb.artstation.com/p/assets/images/images/094/912/699/large/peter-salamon-kintsugi-oil-painting-110x70-jpg.webp?1766952322", "https://cdna.artstation.com/p/assets/images/images/094/912/706/large/peter-salamon-kintsugi-oil-painting-110x70-detail-03-jpg.webp?1766952336", "https://cdna.artstation.com/p/assets/images/images/094/912/712/large/peter-salamon-kintsugi-oil-painting-110x70-detail-01-jpg.webp?1766952344", "https://cdna.artstation.com/p/assets/images/images/094/912/714/large/peter-salamon-kintsugi-render-3d-base-jpg.webp?1766952351", "https://cdna.artstation.com/p/assets/images/images/094/912/718/large/peter-salamon-kintsugi-raw-model-zbrush-01-jpg.webp?1766952361", "https://cdna.artstation.com/p/assets/images/images/094/912/722/large/peter-salamon-kintsugi-raw-model-zbrush-02-jpg.webp?1766952367"],
+	featured: true
+    },
+    {
+        id: 2,
+        title: "Chaos",
+        year: 2025,
+        medium: "Oil on canvas",
+        dimensions: "110 x 70 cm",
+        description: "In Chaos, the digital model does not seek solutions, but holds questions together.The structural elements are not preparing to fall apart; instead, they remain adjacent, forming unstable relationships.During the painting process, these connections loosen further while the overall form stays intact.The focus shifts from individual elements to the tension that exists between them.",
+        images: ["https://cdna.artstation.com/p/assets/images/images/094/912/366/large/peter-salamon-chaos-oil-painting-110x70-jpg.webp?1766951594", "https://cdnb.artstation.com/p/assets/images/images/094/912/367/small/peter-salamon-chaos-oil-painting-110x70-detail-01-jpg.webp?1766951602", "https://cdnb.artstation.com/p/assets/images/images/094/912/371/large/peter-salamon-chaos-oil-painting-110x70-detail-02-jpg.webp?1766951613", "https://cdna.artstation.com/p/assets/images/images/094/912/376/small/peter-salamon-chaos-render-3d-base-jpg.webp?1766951621", "https://cdnb.artstation.com/p/assets/images/images/094/912/385/small/peter-salamon-chaos-raw-model-zbrush-01-jpg.webp?1766951634", "https://cdna.artstation.com/p/assets/images/images/094/912/392/small/peter-salamon-chaos-raw-model-zbrush-02-jpg.webp?1766951644"],
+	featured: false
+    },
+    {
+        id: 3,
+        title: "In between states",
+        year: 2025,
+        medium: "Oil on canvas",
+        dimensions: "110 x 70 cm",
+        description: "In Between States originates from a structural condition that still holds the body, yet is no longer capable of forming a stable system.In the digital model, the tension between supporting elements and shifting forms is present from the very beginning.During the painting process, this unstable balance becomes the central focus: the form does not collapse, but it no longer provides security.The structure of the image embodies the temporary nature of transition.",
+        images: ["https://cdnb.artstation.com/p/assets/images/images/094/912/189/small/peter-salamon-in-between-states-oil-painting-110x70-jpg.webp?1766950913","https://cdna.artstation.com/p/assets/images/images/094/912/202/small/peter-salamon-in-between-states-oil-painting-110x70-detail-01-jpg.webp?1766950928","https://cdna.artstation.com/p/assets/images/images/094/912/208/small/peter-salamon-in-between-states-oil-painting-110x70-detail-02-jpg.webp?1766950935", "https://cdnb.artstation.com/p/assets/images/images/094/912/215/small/peter-salamon-in-between-states-render-3d-base-jpg.webp?1766950949","https://cdna.artstation.com/p/assets/images/images/094/912/218/small/peter-salamon-in-between-states-raw-model-zbrush-01-jpg.webp?1766950957", "https://cdna.artstation.com/p/assets/images/images/094/912/222/small/peter-salamon-in-between-states-raw-model-zbrush-02-jpg.webp?1766950966" ],
+    },
+    {
+        id: 4,
+        title: "Digital erosion",
+        year: 2024,
+        medium: "Oil on canvas",
+        dimensions: "100x150 cm",
+        description:"Digital Erosion is the imprint of a long-lasting, barely noticeable internal process. The form gradually loses its stability, yet the disintegration never becomes fully explicit. The work conveys the quiet presence of mental exhaustion and gradual depletion.",
+        images: ["https://cdna.artstation.com/p/assets/images/images/094/912/018/large/peter-salamon-digital-erosion-oil-painting-110x70-jpg.webp?1766950462", "https://cdnb.artstation.com/p/assets/images/images/094/912/021/large/peter-salamon-digital-erosion-oil-painting-110x70-detail-02-jpg.webp?1766950486", "https://cdnb.artstation.com/p/assets/images/images/094/912/023/large/peter-salamon-digital-erosion-oil-painting-110x70-detail-03-jpg.webp?1766950494", "https://cdnb.artstation.com/p/assets/images/images/094/912/031/large/peter-salamon-digital-erosion-raw-model-zbrush-jpg.webp?1766950528", "https://cdnb.artstation.com/p/assets/images/images/094/912/033/large/peter-salamon-digital-erosion-render-3d-base-01-jpg.webp?1766950538", "https://cdna.artstation.com/p/assets/images/images/094/912/038/large/peter-salamon-digital-erosion-render-3d-base-02-jpg.webp?1766950547"],
+    },
+    {
+        id: 5,
+        title: "Axiety",
+        year: 2024,
+        medium: "Oil on canvas",
+        dimensions: "110 x 70 cm",
+        description:"Anxiety reflects the transition between digital and painterly thinking.The 3D model functioned as a spatial sketch in which tension and fractures were already present at an early stage. During the painting process, these structures lose their technical precision and transform into materiality, surface, and spatial presence. The focus is not realism, but the structural visualization of an internal state.",
+        images: ["https://cdnb.artstation.com/p/assets/images/images/094/911/717/large/peter-salamon-anxiety-oil-painting-110x70-jpg.webp?1766949484", "https://cdnb.artstation.com/p/assets/images/images/094/911/723/large/peter-salamon-anxiety-oil-painting-110x70-detail-01-jpg.webp?1766949500", "https://cdnb.artstation.com/p/assets/images/images/094/911/725/large/peter-salamon-anxiety-oil-painting-110x70-detail-02-jpg.webp?1766949507", "https://cdnb.artstation.com/p/assets/images/images/094/911/729/large/peter-salamon-anxiety-render-3d-base-jpg.webp?1766949519", "https://cdnb.artstation.com/p/assets/images/images/094/911/731/large/peter-salamon-anxiety-raw-model-zbrush-02-jpg.webp?1766949532", "https://cdnb.artstation.com/p/assets/images/images/094/911/733/large/peter-salamon-anxiety-raw-model-zbrush-01-jpg.webp?1766949541"],
+    },
+    {
+        id: 6,
+        title: "Overthinking",
+        year: 2025,
+        medium: "Oil on canvas",
+        dimensions: "110 x 70 cm",
+        description:"Overthinking is built upon a closed, self-referential structural logic.Within the digital model, repetition and regularity do not generate stability, but restriction.During the painting process, these structures do not dissolve; instead, they condense into material, while the system continues to maintain its own rigidity.The tension of the image emerges from the fact that the structure simultaneously holds the form together and exhausts it.",
+        images: ["https://cdna.artstation.com/p/assets/images/images/094/910/782/large/peter-salamon-overthinking-oil-painting-110x70-jpg.webp?1766947593", "https://cdnb.artstation.com/p/assets/images/images/094/910/809/large/peter-salamon-overthinking-oil-painting-110x70-detail-01-jpg.webp?1766947656", "https://cdna.artstation.com/p/assets/images/images/094/910/812/large/peter-salamon-overthinking-oil-painting-110x70-detail-02-jpg.webp?1766947665", "https://cdnb.artstation.com/p/assets/images/images/094/910/819/large/peter-salamon-overthinking-render-3d-base-jpg.webp?1766947677", "https://cdnb.artstation.com/p/assets/images/images/094/910/823/large/peter-salamon-overthinking-raw-model-zbrush-01-jpg.webp?1766947690", "https://cdnb.artstation.com/p/assets/images/images/094/910/825/large/peter-salamon-overthinking-raw-model-zbrush-02-jpg.webp?1766947696"],
+    }
+];
+
+// State management
+let currentLightboxIndex = 0;
+let currentSubImageIndex = 0;
+let isLightboxOpen = false;
+let isMobileNavOpen = false;
+
+// DOM elements
+const galleryGrid = document.getElementById('gallery-grid');
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxTitle = document.getElementById('lightbox-title');
+const lightboxYear = document.getElementById('lightbox-year');
+const lightboxMedium = document.getElementById('lightbox-medium');
+const lightboxDimensions = document.getElementById('lightbox-dimensions');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxPrev = document.getElementById('lightbox-prev');
+const lightboxNext = document.getElementById('lightbox-next');
+const lightboxOverlay = document.getElementById('lightbox-overlay');
+const navToggle = document.getElementById('nav-toggle');
+const nav = document.getElementById('nav');
+const navLinks = document.querySelectorAll('.nav__link');
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+const header = document.getElementById('header');
+
+// Initialize the application
+function init() {
+    renderGallery();
+    setupEventListeners();
+    setupScrollEffects();
+    setupSmoothScrolling();
+}
+
+// Render gallery items
+function renderGallery() {
+    galleryGrid.innerHTML = '';
+    
+    artworks.forEach((artwork, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery__item';
+        galleryItem.setAttribute('data-index', index);
+        
+        galleryItem.innerHTML = `
+            <img src="${artwork.images[0]}" alt="${artwork.title}" class="gallery__image" loading="lazy">
+            <div class="gallery__overlay">
+                <h3 class="gallery__title">${artwork.title}</h3>
+                <p class="gallery__year">${artwork.year}</p>
+            </div>
+        `;
+        
+galleryItem.addEventListener('click',() => openLightbox(index));
+
+        galleryGrid.appendChild(galleryItem);
+    });
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Gallery click events
+    galleryGrid.addEventListener('click', (e) => {
+        const galleryItem = e.target.closest('.gallery__item');
+        if (galleryItem) {
+            const index = parseInt(galleryItem.getAttribute('data-index'));
+            openLightbox(index);
+        }
+    });
+    
+    // Lightbox events
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxOverlay.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrevImage);
+    lightboxNext.addEventListener('click', showNextImage);
+    
+    // Keyboard events
+    document.addEventListener('keydown', (e) => {
+        if (isLightboxOpen) {
+            switch (e.key) {
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'ArrowLeft':
+                    showPrevImage();
+                    break;
+                case 'ArrowRight':
+                    showNextImage();
+                    break;
+            }
+        }
+    });
+    
+    // Mobile navigation
+    navToggle.addEventListener('click', toggleMobileNav);
+    
+    // Close mobile nav when clicking on links
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMobileNavOpen) {
+                toggleMobileNav();
+            }
+        });
+    });
+    
+    // Scroll to top button
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Contact form
+    contactForm.addEventListener('submit', handleFormSubmit);
+    
+    // Window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && isMobileNavOpen) {
+            toggleMobileNav();
+        }
+    });
+}
+
+// Lightbox funcitons
+function openLightbox(index) {
+    currentLightboxIndex = index;
+    currentSubImageIndex = 0;
+    isLightboxOpen = true;
+    
+    // Először megmutatjuk a modált, hogy az animáció látszódjon
+    const lightboxElement = document.getElementById('lightbox');
+    if (lightboxElement) {
+        lightboxElement.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Csak ezután frissítjük a tartalmat, így az első kép is szépen úszik be
+    updateLightboxContent();
+}
+
+function updateLightboxContent() {
+    const artwork = artworks[currentLightboxIndex];
+    if (!artwork) return;
+
+    const imgElement = document.getElementById('lightbox-image');
+    
+    if (imgElement) {
+        // 1. Levesszük az animációs osztályt
+        imgElement.classList.remove('fade-in');
+        
+        // 2. Trükk: kényszerítjük a böngészőt, hogy észrevegye a változást
+        void imgElement.offsetWidth; 
+        
+        // 3. Beállítjuk az új képet és visszatesszük az animációt
+        imgElement.src = artwork.images[currentSubImageIndex];
+        imgElement.alt = artwork.title;
+        imgElement.classList.add('fade-in');
+    }
+    
+    // Szöveges adatok betöltése
+    document.getElementById('lightbox-title').textContent = artwork.title;
+    document.getElementById('lightbox-year').textContent = artwork.year;
+    document.getElementById('lightbox-medium').textContent = artwork.medium;
+    document.getElementById('lightbox-dimensions').textContent = artwork.dimensions;
+
+    // A leírás (description) betöltése a jobb oldali panelbe
+    const descElement = document.getElementById('lightbox-description');
+    if (descElement) {
+        descElement.textContent = artwork.description;
+    }
+
+    // Navigációs gombok (nyilak) kezelése
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    
+    if (artwork.images.length > 1) {
+       if (prevBtn) prevBtn.style.display = 'flex';
+       if (nextBtn) nextBtn.style.display = 'flex';
+    } else {
+       if (prevBtn) prevBtn.style.display = 'none';
+       if (nextBtn) nextBtn.style.display = 'none';
+    }
+}
+
+function closeLightbox() {
+    isLightboxOpen = false;
+    const lightboxElement = document.getElementById('lightbox');
+    if (lightboxElement) {
+        lightboxElement.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+}
+
+function showPrevImage() {
+    const artwork = artworks[currentLightboxIndex];
+    if (!artwork) return;
+    currentSubImageIndex = (currentSubImageIndex - 1 + artwork.images.length) % artwork.images.length;
+    updateLightboxContent();
+}
+
+function showNextImage() {
+    const artwork = artworks[currentLightboxIndex];
+    if (!artwork) return;
+    currentSubImageIndex = (currentSubImageIndex + 1) % artwork.images.length;
+    updateLightboxContent();
+}
+
+// Mobile navigation
+function toggleMobileNav() {
+    isMobileNavOpen = !isMobileNavOpen;
+    nav.classList.toggle('active', isMobileNavOpen);
+    navToggle.classList.toggle('active', isMobileNavOpen);
+}
+
+// Scroll effects
+function setupScrollEffects() {
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Header scroll effect
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        // Scroll to top button
+        if (scrollTop > 500) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, false);
+}
+
+// Smooth scrolling for navigation links
+function setupSmoothScrolling() {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Form handling
+function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(contactForm);
+    const name = formData.get('name').trim();
+    const email = formData.get('email').trim();
+    const message = formData.get('message').trim();
+    
+    // Basic validation
+    if (!name || !email || !message) {
+        showFormMessage('Please fill out all fields.', 'error');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        showFormMessage('Please use a valid e-mail.', 'error');
+        return;
+    }
+    
+    // Simulate form submission
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+    
+    setTimeout(() => {
+        showFormMessage('Thank you for contacting me!', 'success');
+        contactForm.reset();
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+    }, 2000);
+}
+
+function showFormMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = `form-message ${type}`;
+    
+    setTimeout(() => {
+        formMessage.className = 'form-message';
+    }, 5000);
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Lazy loading for images
+function setupLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+}
+
+// Add entrance animations
+function setupEntranceAnimations() {
+    if ('IntersectionObserver' in window) {
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        const animatedElements = document.querySelectorAll('.gallery__item, .about__content, .contact__content');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            animationObserver.observe(el);
+        });
+    }
+}
+
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
