@@ -1235,32 +1235,40 @@ img {
 
 /* About Section */
 .about__image {
-  position: relative !important; /* Itt alapból kikapcsoljuk a ragadást */
-  top: 0 !important;
   display: block;
   width: 100%;
+  z-index: 10;
 }
 
-/* 2. PC-s nézet (Csak 1024px felett kapcsoljuk be) */
+/* 2. PC NÉZET - Csak itt legyen sticky */
 @media (min-width: 1024px) {
   .about__image {
-    position: -webkit-sticky !important; /* Safari támogatás miatt */
-    position: sticky !important;
-    top: calc(var(--header-height) + var(--space-32)) !important;
+    position: -webkit-sticky; /* Safari miatt */
+    position: sticky;
+    /* Fontos: ellenőrizd, hogy a --header-height létezik-e, 
+       ha nem biztos, írj helyette fix értéket, pl: 80px */
+    top: calc(var(--header-height, 70px) + 20px);
   }
 }
 
-/* 3. Mobil nézet finomítása */
-@media (max-width: 768px) {
-  .about__content {
-    display: flex; /* Grid helyett néha a flex biztosabb mobilon */
-    flex-direction: column;
-    gap: var(--space-32);
+/* 3. IPHONE / MOBIL JAVÍTÁS (Max 1023px-ig) */
+@media (max-width: 1023px) {
+  .about__image {
+    /* A 'static' teljesen kikapcsolja a sticky-t és a top-ot */
+    position: static !important; 
+    margin-bottom: var(--space-32);
+    transform: none !important; /* Bármilyen parallax scriptet is kiüt */
   }
 
-  .about__image {
-    order: -1; /* Ezzel a kép biztosan a szöveg ELÉ kerül mobilon */
-    margin-bottom: var(--space-16);
+  .about__content {
+    /* Kikényszerítjük, hogy ne gridként, hanem egyszerű blokként viselkedjen */
+    display: block !important; 
+  }
+  
+  .about__img {
+    /* Biztosítjuk, hogy ne legyen túlméretezve */
+    max-width: 100%;
+    height: auto;
   }
 }
 /* Contact Section */
