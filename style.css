@@ -1331,7 +1331,7 @@ img {
   transform: translateY(-2px);
 }
 
-/* Form styles */
+/* --- CONTACT FORM --- */
 .contact__form {
   background-color: var(--color-surface);
   padding: var(--space-32);
@@ -1373,6 +1373,7 @@ textarea.form-control {
   min-height: 120px;
 }
 
+/* --- BUTTONS --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1400,11 +1401,6 @@ textarea.form-control {
   box-shadow: var(--shadow-md);
 }
 
-.btn--primary:active {
-  background-color: var(--color-primary-active);
-  transform: translateY(0);
-}
-
 .btn--full-width {
   width: 100%;
 }
@@ -1418,128 +1414,87 @@ textarea.form-control {
   display: none;
 }
 
-.form-message.success {
-  background-color: rgba(var(--color-teal-500-rgb), 0.1);
-  color: var(--color-success);
-  border: 1px solid rgba(var(--color-teal-500-rgb), 0.2);
-  display: block;
-}
+.form-message.success { display: block; color: var(--color-success); }
+.form-message.error { display: block; color: var(--color-error); }
 
-.form-message.error {
-  background-color: rgba(var(--color-red-500-rgb), 0.1);
-  color: var(--color-error);
-  border: 1px solid rgba(var(--color-red-500-rgb), 0.2);
-  display: block;
-}
-
-/* --- LIGHTBOX FŐ KERET FIX --- */
+/* --- LIGHTBOX (MINDEN JAVÍTÁS EGYBEN) --- */
 .lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 10000;
-    display: none; /* Alaphelyzetben rejtve, így a gombjai is rejtve maradnak */
-    align-items: center;
-    justify-content: center;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  z-index: 99999 !important;
+  display: none; /* Ez rejti el a gombokat is! */
+  align-items: center;
+  justify-content: center;
 }
 
-/* Amikor a JavaScript hozzáadja az 'active' osztályt */
 .lightbox.active {
-    display: flex !important;
+  display: flex !important;
 }
 
-/* --- GOMBOK JAVÍTOTT ÉS BIZTONSÁGOS STÍLUSA --- */
-/* Ez a rész csak akkor látszik, ha a .lightbox aktív */
+.lightbox__content {
+  position: relative !important;
+  width: 95vw !important;
+  max-height: 90vh !important;
+  background-color: #000 !important;
+  z-index: 100000 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+}
+
+/* GOMBOK - Most már csak a megnyitott lightboxban léteznek */
 .lightbox__close, 
 .lightbox__nav {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    
-    /* iPhone/Safari megjelenés fix */
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    -webkit-border-radius: 50% !important;
-    border-radius: 50% !important;
-    
-    /* Színek - Nyers fekete, fehér kerettel a láthatóságért */
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border: 2px solid #ffffff !important;
-    
-    /* Pozíció - Most már a .lightbox-on BELÜL maradnak */
-    position: absolute !important;
-    z-index: 10001 !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  position: absolute !important; 
+  z-index: 100001 !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  outline: none !important;
+  padding: 0 !important;
 }
 
-/* Bezáró gomb (X) helyzete */
 .lightbox__close {
-    top: 20px !important;
-    right: 20px !important;
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 22px !important;
-    font-weight: bold !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 24px !important;
 }
 
-/* Nyilak helyzete */
 .lightbox__nav {
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: 48px !important;
-    height: 48px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 48px !important;
+  height: 48px !important;
 }
 
 .lightbox__nav--prev { left: 15px !important; }
 .lightbox__nav--next { right: 15px !important; }
 
-/* SVG ikonok kényszerítése */
 .lightbox__nav svg {
-    width: 24px !important;
-    height: 24px !important;
-    fill: #ffffff !important;
-    display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+  fill: #ffffff !important;
+  display: block !important;
 }
 
-/* --- TARTALOM GÖRDÍTÉSE (MOBIL FIX) --- */
-.lightbox__content {
-    position: relative;
-    width: 95vw;
-    max-height: 90vh;
-    background-color: #000;
-    z-index: 10000;
-    overflow-y: auto; /* Itt engedjük a görgetést */
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    flex-direction: column;
-}
+.lightbox__content::-webkit-scrollbar { width: 6px; }
+.lightbox__content::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
 
-/* Görgetősáv kinézete */
-.lightbox__content::-webkit-scrollbar {
-    width: 6px;
-}
-.lightbox__content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-/* --- GÖRGETŐSÁV STÍLUS --- */
-.lightbox__content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.lightbox__content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-/* Scroll to top button */
+/* --- SCROLL TO TOP --- */
 .scroll-to-top {
   position: fixed;
   bottom: var(--space-32);
@@ -1552,36 +1507,18 @@ textarea.form-control {
   border-radius: var(--radius-full);
   cursor: pointer;
   box-shadow: var(--shadow-lg);
-  transition: all var(--duration-normal) var(--ease-standard);
+  transition: all 0.3s ease;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px);
+  z-index: 1000; /* Kisebb mint a lightbox */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
 
-.scroll-to-top:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .scroll-to-top {
-    bottom: var(--space-24);
-    right: var(--space-24);
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* Utility classes */
+/* --- UTILITIES --- */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1594,23 +1531,17 @@ textarea.form-control {
   border-width: 0;
 }
 
-.fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-    will-change: opacity, transform;
-}
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.97); /* Kicsit bátrabb méretváltás a látvány kedvéért */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* Alapértelmezett állapot a képnek, hogy ne ugorjon nagyot */
 .lightbox__image {
-    transition: filter 0.3s ease; /* Ha esetleg más effektet is használnál */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
 }
