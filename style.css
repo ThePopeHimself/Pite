@@ -1432,33 +1432,30 @@ textarea.form-control {
   display: block;
 }
 
-/* Lightbox */
 .lightbox__close, 
 .lightbox__nav {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     
-    /* iPhone fixek */
+    /* iPhone/Safari megjelenés fix */
     -webkit-appearance: none !important;
     appearance: none !important;
-    -webkit-border-radius: 50% !important; /* Régi Safari miatt */
+    -webkit-border-radius: 50% !important;
     border-radius: 50% !important;
     
-    /* Színek - Nyersen, változók nélkül */
+    /* Színek - Fekete alap, fehér keret */
     background-color: #000000 !important;
-    background: #000000 !important;
     color: #ffffff !important;
-    fill: #ffffff !important;
-    border: 2px solid #ffffff !important; /* Vastagabb fehér keret */
+    border: 2px solid #ffffff !important;
     
-    /* Pozíció */
+    /* Rétegrend és pozíció */
     position: absolute !important;
     z-index: 9999999 !important;
     cursor: pointer !important;
     padding: 0 !important;
     margin: 0 !important;
-    overflow: hidden !important;
+    outline: none !important;
 }
 
 /* Bezáró gomb (X) */
@@ -1472,9 +1469,10 @@ textarea.form-control {
     line-height: 1 !important;
 }
 
-/* Nyilak */
+/* Navigációs nyilak */
 .lightbox__nav {
-    top: 45% !important;
+    top: 50% !important; /* Középre igazítva */
+    transform: translateY(-50%) !important;
     width: 44px !important;
     height: 44px !important;
 }
@@ -1482,18 +1480,19 @@ textarea.form-control {
 .lightbox__nav--prev { left: 10px !important; }
 .lightbox__nav--next { right: 10px !important; }
 
-/* SVG ikonok kényszerítése */
-.lightbox__nav svg, 
-.lightbox__nav i {
+/* Ikonok kényszerítése fehérre */
+.lightbox__nav svg {
     width: 24px !important;
     height: 24px !important;
-    fill: #ffffff !important;
-    color: #ffffff !important;
+    fill: #ffffff !important; /* SVG nyíl színe */
     display: block !important;
-/* GÖRGETŐSÁV STÍLUS */
+} /* <--- ITT VOLT A HIÁNYZÓ ZÁRÓJEL! */
+
+/* --- GÖRGETŐSÁV STÍLUS --- */
 .lightbox__content::-webkit-scrollbar {
     width: 6px;
 }
+
 .lightbox__content::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
