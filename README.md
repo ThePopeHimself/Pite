@@ -40,4 +40,4 @@ German: Fluent
 Hungarian: Native 
 
 
-English: Professional working proficiency****
+English: Fluent
