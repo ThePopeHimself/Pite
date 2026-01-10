@@ -1234,86 +1234,35 @@ img {
 }
 
 /* About Section */
-.about {
-  padding: var(--space-96) 0;
-  background-color: var(--color-bg-1);
-}
-
-.about__content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: var(--space-64);
-  align-items: start;
-}
-
-/* Kép konténer - Alapértelmezésben (MOBIL) nincs sticky */
 .about__image {
-  position: relative; /* Mobilon együtt mozog a tartalommal */
-  top: auto;
+  position: relative !important; /* Itt alapból kikapcsoljuk a ragadást */
+  top: 0 !important;
+  display: block;
+  width: 100%;
 }
 
-/* PC NÉZET (769px-től felfelé) */
-@media (min-width: 769px) {
+/* 2. PC-s nézet (Csak 1024px felett kapcsoljuk be) */
+@media (min-width: 1024px) {
   .about__image {
-    position: sticky; /* Csak itt lesz "ragadós" */
-    top: calc(var(--header-height) + var(--space-32));
+    position: -webkit-sticky !important; /* Safari támogatás miatt */
+    position: sticky !important;
+    top: calc(var(--header-height) + var(--space-32)) !important;
   }
 }
 
-/* MOBIL NÉZET (768px-ig) */
+/* 3. Mobil nézet finomítása */
 @media (max-width: 768px) {
   .about__content {
-    grid-template-columns: 1fr;
+    display: flex; /* Grid helyett néha a flex biztosabb mobilon */
+    flex-direction: column;
     gap: var(--space-32);
   }
-  
-  /* Mobilon a kép kerüljön felülre, a szöveg alá */
+
   .about__image {
+    order: -1; /* Ezzel a kép biztosan a szöveg ELÉ kerül mobilon */
     margin-bottom: var(--space-16);
   }
 }
-
-.about__img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-}
-
-.about__title {
-  margin-bottom: var(--space-32);
-}
-
-.about__bio {
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-48);
-}
-
-.about__section {
-  margin-bottom: var(--space-32);
-}
-
-.about__section-title {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--space-16);
-  color: var(--color-primary);
-}
-
-.about__list {
-  list-style: none;
-}
-
-.about__list li {
-  padding: var(--space-8) 0;
-  border-bottom: 1px solid var(--color-border);
-  line-height: var(--line-height-relaxed);
-}
-
-.about__list li:last-child {
-  border-bottom: none;
-}
-
 /* Contact Section */
 .contact {
   padding: var(--space-96) 0;
