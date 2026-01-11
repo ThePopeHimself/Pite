@@ -85,24 +85,14 @@ let isMobileNavOpen = false;
 // DOM elements
 const galleryGrid = document.getElementById('gallery-grid');
 const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightbox-image');
-const lightboxTitle = document.getElementById('lightbox-title');
-const lightboxYear = document.getElementById('lightbox-year');
-const lightboxMedium = document.getElementById('lightbox-medium');
-const lightboxDimensions = document.getElementById('lightbox-dimensions');
-const lightboxClose = document.getElementById('lightbox-close');
-const lightboxPrev = document.getElementById('lightbox-prev');
-const lightboxNext = document.getElementById('lightbox-next');
-const lightboxOverlay = document.getElementById('lightbox-overlay');
 const navToggle = document.getElementById('nav-toggle');
 const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('.nav__link');
 const scrollToTopBtn = document.getElementById('scroll-to-top');
 const contactForm = document.getElementById('contact-form');
-const formMessage = document.getElementById('form-message');
 const header = document.getElementById('header');
 
-// Initialize the application
+// --- INITIALIZATION ---
 function init() {
     renderGallery();
     setupEventListeners();
@@ -110,7 +100,7 @@ function init() {
     setupSmoothScrolling();
 }
 
-// Render gallery items
+// --- GALLERY RENDER ---
 function renderGallery() {
     if (!galleryGrid) return;
     const lang = localStorage.getItem('selectedLang') || 'en';
@@ -136,76 +126,12 @@ function renderGallery() {
     });
 }
 
-// Setup event listeners
-function setupEventListeners() {
-    // Gallery click events
-    galleryGrid.addEventListener('click', (e) => {
-        const galleryItem = e.target.closest('.gallery__item');
-        if (galleryItem) {
-            const index = parseInt(galleryItem.getAttribute('data-index'));
-            openLightbox(index);
-        }
-    });
-    
-    // Lightbox events
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxOverlay.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', showPrevImage);
-    lightboxNext.addEventListener('click', showNextImage);
-    
-    // Keyboard events
-    document.addEventListener('keydown', (e) => {
-        if (isLightboxOpen) {
-            switch (e.key) {
-                case 'Escape':
-                    closeLightbox();
-                    break;
-                case 'ArrowLeft':
-                    showPrevImage();
-                    break;
-                case 'ArrowRight':
-                    showNextImage();
-                    break;
-            }
-        }
-    });
-    
-    // Mobile navigation
-    navToggle.addEventListener('click', toggleMobileNav);
-    
-    // Close mobile nav when clicking on links
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (isMobileNavOpen) {
-                toggleMobileNav();
-            }
-        });
-    });
-    
-    // Scroll to top button
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    
-    // Contact form
-    contactForm.addEventListener('submit', handleFormSubmit);
-    
-    // Window resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && isMobileNavOpen) {
-            toggleMobileNav();
-        }
-    });
-}
-
-// Lightbox funcitons
+// --- LIGHTBOX FUNCTIONS ---
 function openLightbox(index) {
     currentLightboxIndex = index;
     currentSubImageIndex = 0;
     isLightboxOpen = true;
     
-    // Először megmutatjuk a modált, hogy az animáció látszódjon
-    const lightboxElement = document.getElementById('lightbox');
     if (lightbox) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -216,8 +142,8 @@ function openLightbox(index) {
 function updateLightboxContent() {
     const artwork = artworks[currentLightboxIndex];
     if (!artwork) return;
-	const lang = localStorage.getItem('selectedLang') || 'en';
-	
+    const lang = localStorage.getItem('selectedLang') || 'en';
+
     const imgElement = document.getElementById('lightbox-image');
     if (imgElement) {
         imgElement.classList.remove('fade-in');
@@ -227,29 +153,26 @@ function updateLightboxContent() {
         imgElement.classList.add('fade-in');
     }
     
-    // Szöveges adatok betöltése
     document.getElementById('lightbox-title').textContent = artwork.title[lang];
     document.getElementById('lightbox-year').textContent = artwork.year;
     document.getElementById('lightbox-medium').textContent = artwork.medium[lang];
     document.getElementById('lightbox-dimensions').textContent = artwork.dimensions;
-	
-    // A leírás (description) betöltése a jobb oldali panelbe
+
     const descElement = document.getElementById('lightbox-description');
     if (descElement) {
         descElement.textContent = artwork.description[lang];
     }
-}
 
-    // Navigációs gombok (nyilak) kezelése
+    // Navigációs gombok kezelése
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
     
     if (artwork.images.length > 1) {
-       if (prevBtn) prevBtn.style.display = 'flex';
-       if (nextBtn) nextBtn.style.display = 'flex';
+        if (prevBtn) prevBtn.style.display = 'flex';
+        if (nextBtn) nextBtn.style.display = 'flex';
     } else {
-       if (prevBtn) prevBtn.style.display = 'none';
-       if (nextBtn) nextBtn.style.display = 'none';
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
     }
 }
 
@@ -271,105 +194,7 @@ function showNextImage() {
     updateLightboxContent();
 }
 
-// Mobile navigation
-function toggleMobileNav() {
-    isMobileNavOpen = !isMobileNavOpen;
-    nav.classList.toggle('active', isMobileNavOpen);
-    navToggle.classList.toggle('active', isMobileNavOpen);
-}
-
-// Scroll effects
-function setupScrollEffects() {
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Header scroll effect
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        
-        // Scroll to top button
-        if (scrollTop > 500) {
-            scrollToTopBtn.classList.add('visible');
-        } else {
-            scrollToTopBtn.classList.remove('visible');
-        }
-        
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }, false);
-}
-
-// Smooth scrolling for navigation links
-function setupSmoothScrolling() {
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Lazy loading for images
-function setupLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
-                }
-            });
-        });
-        
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-}
-
-// Add entrance animations
-function setupEntranceAnimations() {
-    if ('IntersectionObserver' in window) {
-        const animationObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        const animatedElements = document.querySelectorAll('.gallery__item, .about__content, .contact__content');
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            animationObserver.observe(el);
-        });
-    }
-}
-
-// 1. A javított setLanguage függvény
+// --- LANGUAGE SETTING ---
 function setLanguage(lang) {
     localStorage.setItem('selectedLang', lang);
     const elements = document.querySelectorAll('.lang-text');
@@ -381,22 +206,61 @@ function setLanguage(lang) {
     renderGallery();
     
     if (isLightboxOpen) {
-        updateLightboxContent(); // Fontos: Frissíti a nyitott lightboxot
+        updateLightboxContent();
     }
 
-    // Gombok aktív állapotának kezelése
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById('btn-' + lang);
     if (activeBtn) activeBtn.classList.add('active');
 }
 
-// 2. Egységesített indítás az oldal betöltésekor
-	document.addEventListener('DOMContentLoaded', () => {
-		init();
-    	const savedLang = localStorage.getItem('selectedLang') || 'en';
-		setLanguage(savedLang);
-	});
+// --- HELPERS & EVENTS ---
+function setupEventListeners() {
+    document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-overlay')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev')?.addEventListener('click', showPrevImage);
+    document.getElementById('lightbox-next')?.addEventListener('click', showNextImage);
+    
+    navToggle?.addEventListener('click', () => {
+        isMobileNavOpen = !isMobileNavOpen;
+        nav.classList.toggle('active', isMobileNavOpen);
+        navToggle.classList.toggle('active', isMobileNavOpen);
+    });
 
-if (isLightboxOpen) {
-    updateLightboxContent();
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (!isLightboxOpen) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrevImage();
+        if (e.key === 'ArrowRight') showNextImage();
+    });
 }
+
+// Görgetési effektusok (rövidített példa)
+function setupScrollEffects() {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        if (scrollToTopBtn) {
+            scrollTop > 500 ? scrollToTopBtn.classList.add('visible') : scrollToTopBtn.classList.remove('visible');
+        }
+    });
+}
+
+function setupSmoothScrolling() {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// --- START ---
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    const savedLang = localStorage.getItem('selectedLang') || 'en';
+    setLanguage(savedLang);
+});
