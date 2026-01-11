@@ -1658,60 +1658,51 @@ img {
     margin-top: 30px !important;
 }
 
-/* 2. LIGHTBOX SPLIT LAYOUT (PC: Kép balra, Szöveg jobbra) */
-/* 2. LIGHTBOX SPLIT LAYOUT (PC: Kép balra, Szöveg jobbra) */
 @media (min-width: 1024px) {
-    /* Fontos: lekapcsoljuk a görgetést a fő konténeren, hogy a panelek külön éljenek */
     .lightbox__content {
         width: 90vw !important;
         height: 85vh !important;
-        max-width: 1400px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important; /* EZT MÓDOSÍTSD: Ne görögjön az egész! */
-        padding: 0 !important;
-        background-color: #000 !important;
+        max-width: 1600px;
+        overflow: hidden !important; /* PC-n ne az egész görögjön */
+        flex-direction: row !important; /* Ez teszi egymás mellé a tartalmát */
+        background-color: #000;
+        border-radius: 8px;
     }
 
-    /* Kényszerítjük a split-layoutot, hogy töltse ki a magasságot */
     .lightbox__split-layout {
         display: flex !important;
-        flex-direction: row !important; 
-        height: 100% !important;
+        flex-direction: row !important;
         width: 100% !important;
-        overflow: hidden !important; /* Megakadályozza a szétcsúszást */
-    }
-
-    .lightbox__left {
-        flex: 0 0 70% !important; /* Fix 70% szélesség balra */
         height: 100% !important;
-        position: relative !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background-color: #000 !important;
     }
 
-    .lightbox__right {
-        flex: 0 0 30% !important; /* Fix 30% szélesség jobbra */
-        height: 100% !important;   /* Ki kell töltenie a teljes magasságot */
-        background-color: #111 !important;
-        padding: 40px !important;
+    /* Bal oldal - A kép helye */
+    .lightbox__left {
+        flex: 0 0 70% !important; /* Fix 70% szélesség */
+        width: 70% !important;
+        height: 100% !important;
+        background-color: #000;
         display: flex !important;
-        flex-direction: column !important;
-        border-left: 1px solid #333 !important;
-        overflow-y: auto !important; /* CSAK ITT legyen görgetés! */
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Jobb oldal - A leírás helye */
+    .lightbox__right {
+        flex: 0 0 30% !important; /* Fix 30% szélesség */
+        width: 30% !important;
+        height: 100% !important;
+        background-color: #111;
+        padding: 40px !important;
+        border-left: 1px solid #222;
+        overflow-y: auto !important; /* Csak itt engedünk görgetést */
+        display: flex !important;
+        flex-direction: column;
         text-align: left !important;
     }
 
-    .lightbox__image-container {
-        width: 100% !important;
-        height: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
+    /* Kép méretezése */
     .lightbox__image {
         max-width: 95% !important;
         max-height: 95% !important;
@@ -1721,35 +1712,36 @@ img {
     }
 }
 
-    .lightbox__right {
-        flex: 1 !important; /* A leírás sávja */
-        background-color: #111 !important;
-        padding: 40px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        border-left: 1px solid #333 !important;
-        overflow-y: auto !important; /* Csak a szöveg görögjön, ha hosszú */
-        text-align: left !important;
-    }
-
-    /* Szövegek stílusa a lightboxban */
-    .lightbox__info h3 {
-        font-size: 1.8rem !important;
-        margin-bottom: 20px !important;
-        font-family: var(--font-family-display) !important;
-    }
-
-    .lightbox__details p {
-        margin-bottom: 10px !important;
-        color: #ccc !important;
-    }
-
-    .lightbox__description {
-        margin-top: 20px !important;
-        line-height: 1.6 !important;
-        color: #fff !important;
-    }
+/* Navigáció és bezárás stílusai */
+.lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    background: #000;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
 }
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: #fff;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.lightbox__nav--prev { left: 10px; }
+.lightbox__nav--next { right: 10px; }
 
 /* 3. MOBIL NÉZET (Lightbox marad egymás alatt) */
 @media (max-width: 1023px) {
