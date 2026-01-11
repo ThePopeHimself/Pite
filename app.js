@@ -365,7 +365,7 @@ function setLanguage(lang) {
     elements.forEach(el => {
         const translation = el.getAttribute(`data-${lang}`);
         if (translation) {
-            el.textContent = translation;
+            el.innerHTML = translation;
         }
     });
 
