@@ -476,17 +476,24 @@ pre code {
 }
 
 .lang-link {
-    text-decoration: none;
-    font-size: 24px; /* Itt állíthatod a zászló méretét */
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    text-decoration: none; /* Aláhúzás levétele */
+    background: none !important; /* Háttér törlése */
+    border: none !important;     /* Esetleges keret törlése */
+    box-shadow: none !important; /* Árnyék levétele */
+    padding: 0;                  /* Felesleges belső távolság törlése */
+    font-size: 24px;             /* Zászló mérete */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    display: inline-block;
+    transition: transform 0.2s ease;
 }
-
-/* Hover effekt: kicsit megnő és élénkebb lesz */
-.lang-link:hover {
-    transform: scale(1.2);
-    opacity: 0.8;
+.lang-link:hover,
+.lang-link:focus,
+.lang-link:active {
+  background: none !important;
+  transform: scale(1.2);
+  outline: none;
 }
 
 .flag-icon {
