@@ -112,6 +112,9 @@ function init() {
 
 // Render gallery items
 function renderGallery() {
+    // 1. Megnézzük, mi az aktuális nyelv
+    const lang = localStorage.getItem('selectedLang') || 'en';
+    
     galleryGrid.innerHTML = '';
     
     artworks.forEach((artwork, index) => {
@@ -119,20 +122,22 @@ function renderGallery() {
         galleryItem.className = 'gallery__item';
         galleryItem.setAttribute('data-index', index);
         
+        // 2. A cím elérése az objektumból: artwork.title[lang]
+        // Használunk egy fallback-et (||), ha az adott nyelven nincs meg a cím
+        const displayTitle = artwork.title[lang] || artwork.title['en'];
+
         galleryItem.innerHTML = `
-            <img src="${artwork.images[0]}" alt="${artwork.title}" class="gallery__image" loading="lazy">
+            <img src="${artwork.images[0]}" alt="${displayTitle}" class="gallery__image" loading="lazy">
             <div class="gallery__overlay">
-                <h3 class="gallery__title">${artwork.title}</h3>
+                <h3 class="gallery__title">${displayTitle}</h3>
                 <p class="gallery__year">${artwork.year}</p>
             </div>
         `;
         
-galleryItem.addEventListener('click',() => openLightbox(index));
-
+        galleryItem.addEventListener('click', () => openLightbox(index));
         galleryGrid.appendChild(galleryItem);
     });
 }
-
 // Setup event listeners
 function setupEventListeners() {
     // Gallery click events
