@@ -1234,8 +1234,9 @@ img {
 }
 
 /* About Section */
+/* --- ALAPBEÁLLÍTÁSOK (Mobilnézet az alap) --- */
 .about__content {
-    display: block; /* Alapértelmezett (mobil) elrendezés */
+    display: block; 
 }
 
 .about__image {
@@ -1254,32 +1255,36 @@ img {
 /* --- PC NÉZET (1024px felett) --- */
 @media (min-width: 1024px) {
     .about__content {
-        display: flex;         /* PC-n egymás mellé teszi a képet és szöveget */
+        display: flex !important;    /* Kényszerített egymás mellé rendezés */
         align-items: flex-start;
-        gap: 60px;             /* Távolság a kép és a szöveg között */
+        gap: 60px;                  /* Távolság a kép és szöveg között */
     }
 
     .about__image {
-        flex: 0 0 40%;         /* A kép a szélesség 40%-át foglalja el */
+        /* Itt a javítás: PC-n nem lehet 100% széles */
+        flex: 0 0 400px;            /* Fix szélesség (állítsd át, ha túl kicsi/nagy) */
+        width: 400px;               
+        position: -webkit-sticky; 
         position: sticky;
         top: calc(var(--header-height, 70px) + 20px);
-        margin-bottom: 0;      /* Itt már nem kell az alsó margó */
+        margin-bottom: 0;
     }
 
     .about__text {
-        flex: 1;               /* A szöveg kitölti a maradék helyet */
+        flex: 1;                    /* A szöveg kitölti a maradék helyet */
     }
 }
 
-/* --- IPHONE / MOBIL SPECIFIKUS (1023px alatt) --- */
+/* --- IPHONE / MOBIL JAVÍTÁS (1023px alatt) --- */
 @media (max-width: 1023px) {
     .about__image {
         position: static !important;
+        width: 100% !important;     /* Mobilon marad a teljes szélesség */
         transform: none !important;
     }
     
     .about__content {
-        display: block !important;
+        display: block !important;  /* Mobilon marad az egymás alatti nézet */
     }
 }
 /* Contact Section */
