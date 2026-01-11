@@ -385,19 +385,30 @@ function setupEntranceAnimations() {
 }
 
 function setLanguage(lang) {
-    // Minden lang-text osztályú elem fordítása
+    // 1. Elmentjük a választott nyelvet a böngészőbe
+    localStorage.setItem('selectedLang', lang);
+
+    // 2. Lefordítjuk a fix szövegeket (amiknél data-en/data-de attribútum van)
     const elements = document.querySelectorAll('.lang-text');
     elements.forEach(el => {
-        const translation = el.getAttribute(`data-${lang}`);
+        const translation = el.getAttribute('data-' + lang);
         if (translation) {
             el.innerHTML = translation;
         }
     });
 
-    // Gombok aktív állapotának kezelése
+	renderGallery();
+	
+	// 4. Ha a Lightbox épp nyitva van, azt is frissítjük azonnal
+    if (typeof isLightboxOpen !== 'undefined' && isLightboxOpen) {
+        updateLightboxContent();
+    }
+
+    // 5. Gombok aktív állapotának kezelése (vizuális visszajelzés)
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.getElementById(`btn-${lang}`);
+    const activeBtn = document.getElementById('btn-' + lang);
     if (activeBtn) activeBtn.classList.add('active');
+}
 
     // Nyelv elmentése
     localStorage.setItem('selectedLang', lang);
