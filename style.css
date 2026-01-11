@@ -1357,26 +1357,44 @@ img {
 }
 
 .contact__social {
-  display: flex;
-  gap: var(--space-16);
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .contact__social-link {
-  display: flex;
+  /* Flexbox-ot használunk a körön belüli középre igazításhoz */
+  display: flex; 
   align-items: center;
   justify-content: center;
+  
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-secondary);
-  color: var(--color-text);
-  transition: all var(--duration-normal) var(--ease-standard);
+  border-radius: 50%; /* var(--radius-full) helyett fix 50%, ha a változó nem él */
+  background-color: var(--color-secondary, #f0f0f0); /* fallback szín, ha a változó üres */
+  color: var(--color-text, #000);
+  
+  transition: transform var(--duration-normal, 0.3s) var(--ease-standard, ease),
+              background-color var(--duration-normal, 0.3s) ease;
+  text-decoration: none;
 }
 
+/* Az SVG ikonok méretezése a körön belül */
+.contact__social-link svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor; /* Átveszi a szülő 'color' értékét */
+  display: block;
+}
+
+/* Hover effekt a látványosabb interakcióhoz */
 .contact__social-link:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  background-color: var(--color-primary, #333);
+  color: #fff; /* Hovernél váltson fehérre az ikon, ha sötét a háttér */
 }
 
 /* --- BUTTONS --- */
