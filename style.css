@@ -1634,7 +1634,7 @@ img {
   display: block;
 }
 
-* --- CONTACT CENTER FIX --- */
+/* 1. KONTAKT SZEKCIÓ KÖZÉPRE IGAZÍTÁSA PC-N */
 .contact__content {
     display: flex !important;
     justify-content: center !important;
@@ -1658,16 +1658,90 @@ img {
     margin-top: 30px !important;
 }
 
-.contact__social-link {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 48px !important;
-    height: 48px !important;
-    background-color: #333 !important;
-    color: #ffffff !important;
-    border-radius: 50% !important;
-    transition: transform 0.3s ease !important;
+/* 2. LIGHTBOX SPLIT LAYOUT (PC: Kép balra, Szöveg jobbra) */
+@media (min-width: 1024px) {
+    .lightbox__content {
+        width: 90vw !important;
+        height: 85vh !important;
+        max-width: 1400px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        background-color: #000 !important;
+    }
+
+    .lightbox__split-layout {
+        display: flex !important;
+        flex-direction: row !important; /* Itt váltunk egymás mellé */
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .lightbox__left {
+        flex: 2 !important; /* A kép kapja a több helyet */
+        height: 100% !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: #000 !important;
+    }
+
+    .lightbox__image-container {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .lightbox__image {
+        max-width: 90% !important;
+        max-height: 90% !important;
+        object-fit: contain !important;
+    }
+
+    .lightbox__right {
+        flex: 1 !important; /* A leírás sávja */
+        background-color: #111 !important;
+        padding: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        border-left: 1px solid #333 !important;
+        overflow-y: auto !important; /* Csak a szöveg görögjön, ha hosszú */
+        text-align: left !important;
+    }
+
+    /* Szövegek stílusa a lightboxban */
+    .lightbox__info h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 20px !important;
+        font-family: var(--font-family-display) !important;
+    }
+
+    .lightbox__details p {
+        margin-bottom: 10px !important;
+        color: #ccc !important;
+    }
+
+    .lightbox__description {
+        margin-top: 20px !important;
+        line-height: 1.6 !important;
+        color: #fff !important;
+    }
 }
 
+/* 3. MOBIL NÉZET (Lightbox marad egymás alatt) */
+@media (max-width: 1023px) {
+    .lightbox__split-layout {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .lightbox__left {
+        height: 50vh !important;
+    }
+    .lightbox__right {
+        padding: 20px !important;
+    }
 }
