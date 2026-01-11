@@ -315,55 +315,6 @@ function setupSmoothScrolling() {
     });
 }
 
-// Form handling
-function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const name = formData.get('name').trim();
-    const email = formData.get('email').trim();
-    const message = formData.get('message').trim();
-    
-    // Basic validation
-    if (!name || !email || !message) {
-        showFormMessage('Please fill out all fields.', 'error');
-        return;
-    }
-    
-    if (!isValidEmail(email)) {
-        showFormMessage('Please use a valid e-mail.', 'error');
-        return;
-    }
-    
-    // Simulate form submission
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
-    
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-    
-    setTimeout(() => {
-        showFormMessage('Thank you for contacting me!', 'success');
-        contactForm.reset();
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-    }, 2000);
-}
-
-function showFormMessage(message, type) {
-    formMessage.textContent = message;
-    formMessage.className = `form-message ${type}`;
-    
-    setTimeout(() => {
-        formMessage.className = 'form-message';
-    }, 5000);
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
 // Lazy loading for images
 function setupLazyLoading() {
     if ('IntersectionObserver' in window) {
