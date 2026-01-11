@@ -4,7 +4,7 @@ const artworks = [
         id: 1,
         title: { en: "Kintsugi", de: "Kintsugi" },
         year: 2024,
-	    medium: { en: "Oil on canvas", de: "Öl auf Leinwand" },,
+	    medium: { en: "Oil on canvas", de: "Öl auf Leinwand" },
         dimensions: "110 x 70 cm",
         description: {
 			en: "Kintsugi is based on an original 3D model that served as a starting point for spatial and formal thinking.The digital structure was not conceived as a final solution, but as an inspirational framework, gradually transformed through the process of painting.The aim was not precision, but the amplification of optical spatial effect — allowing the form to almost step out of the picture plane.Throughout the painterly process, irregularity is not treated as an error, but as a consciously preserved element.",
@@ -112,9 +112,8 @@ function init() {
 
 // Render gallery items
 function renderGallery() {
-    // 1. Megnézzük, mi az aktuális nyelv
+    if (!galleryGrid) return;
     const lang = localStorage.getItem('selectedLang') || 'en';
-    
     galleryGrid.innerHTML = '';
     
     artworks.forEach((artwork, index) => {
@@ -122,8 +121,6 @@ function renderGallery() {
         galleryItem.className = 'gallery__item';
         galleryItem.setAttribute('data-index', index);
         
-        // 2. A cím elérése az objektumból: artwork.title[lang]
-        // Használunk egy fallback-et (||), ha az adott nyelven nincs meg a cím
         const displayTitle = artwork.title[lang] || artwork.title['en'];
 
         galleryItem.innerHTML = `
@@ -138,6 +135,7 @@ function renderGallery() {
         galleryGrid.appendChild(galleryItem);
     });
 }
+
 // Setup event listeners
 function setupEventListeners() {
     // Gallery click events
@@ -208,47 +206,39 @@ function openLightbox(index) {
     
     // Először megmutatjuk a modált, hogy az animáció látszódjon
     const lightboxElement = document.getElementById('lightbox');
-    if (lightboxElement) {
-        lightboxElement.classList.add('active');
+    if (lightbox) {
+        lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-
-    // Csak ezután frissítjük a tartalmat, így az első kép is szépen úszik be
     updateLightboxContent();
 }
 
 function updateLightboxContent() {
     const artwork = artworks[currentLightboxIndex];
     if (!artwork) return;
-
 	const lang = localStorage.getItem('selectedLang') || 'en';
-
+	
     const imgElement = document.getElementById('lightbox-image');
-    
     if (imgElement) {
-        // 1. Levesszük az animációs osztályt
         imgElement.classList.remove('fade-in');
-        
-        // 2. Trükk: kényszerítjük a böngészőt, hogy észrevegye a változást
         void imgElement.offsetWidth; 
-        
         imgElement.src = artwork.images[currentSubImageIndex];
-        imgElement.alt = artwork.title[lang] || artwork.title['en'];
+        imgElement.alt = artwork.title[lang];
         imgElement.classList.add('fade-in');
     }
     
     // Szöveges adatok betöltése
-    document.getElementById('lightbox-title').textContent = artwork.title[lang] || artwork.title['en'];
+    document.getElementById('lightbox-title').textContent = artwork.title[lang];
     document.getElementById('lightbox-year').textContent = artwork.year;
-    document.getElementById('lightbox-medium').textContent = artwork.medium[lang] || artwork.medium['en'];
+    document.getElementById('lightbox-medium').textContent = artwork.medium[lang];
     document.getElementById('lightbox-dimensions').textContent = artwork.dimensions;
-
+	
     // A leírás (description) betöltése a jobb oldali panelbe
     const descElement = document.getElementById('lightbox-description');
     if (descElement) {
-        // A leírásnál is figyelünk a nyelvre
-        descElement.textContent = artwork.description[lang] || artwork.description['en'];
+        descElement.textContent = artwork.description[lang];
     }
+}
 
     // Navigációs gombok (nyilak) kezelése
     const prevBtn = document.getElementById('lightbox-prev');
@@ -265,23 +255,18 @@ function updateLightboxContent() {
 
 function closeLightbox() {
     isLightboxOpen = false;
-    const lightboxElement = document.getElementById('lightbox');
-    if (lightboxElement) {
-        lightboxElement.classList.remove('active');
-    }
+    if (lightbox) lightbox.classList.remove('active');
     document.body.style.overflow = '';
 }
 
 function showPrevImage() {
     const artwork = artworks[currentLightboxIndex];
-    if (!artwork) return;
     currentSubImageIndex = (currentSubImageIndex - 1 + artwork.images.length) % artwork.images.length;
     updateLightboxContent();
 }
 
 function showNextImage() {
     const artwork = artworks[currentLightboxIndex];
-    if (!artwork) return;
     currentSubImageIndex = (currentSubImageIndex + 1) % artwork.images.length;
     updateLightboxContent();
 }
@@ -386,28 +371,17 @@ function setupEntranceAnimations() {
 
 // 1. A javított setLanguage függvény
 function setLanguage(lang) {
-    // Elmentjük a választott nyelvet
     localStorage.setItem('selectedLang', lang);
-
-    // Lefordítjuk a fix szövegeket (Nav, About, stb.)
     const elements = document.querySelectorAll('.lang-text');
     elements.forEach(el => {
         const translation = el.getAttribute('data-' + lang);
-        if (translation) {
-            el.innerHTML = translation;
-        }
+        if (translation) el.innerHTML = translation;
     });
 
-    // Frissítjük a Galériát (hogy a címek és technikák is váltsanak)
-    if (typeof renderGallery === 'function') {
-        renderGallery();
-    }
+    renderGallery();
     
-    // Ha a Lightbox épp nyitva van, azt is frissítjük azonnal
-    if (typeof isLightboxOpen !== 'undefined' && isLightboxOpen) {
-        if (typeof updateLightboxContent === 'function') {
-            updateLightboxContent();
-        }
+    if (isLightboxOpen) {
+        updateLightboxContent(); // Fontos: Frissíti a nyitott lightboxot
     }
 
     // Gombok aktív állapotának kezelése
@@ -417,18 +391,11 @@ function setLanguage(lang) {
 }
 
 // 2. Egységesített indítás az oldal betöltésekor
-document.addEventListener('DOMContentLoaded', () => {
-    // Megnézzük mi volt az elmentett nyelv, vagy alapértelmezett az angol
-    const savedLang = localStorage.getItem('selectedLang') || 'en';
-    
-    // Először elindítjuk az alap galéria generálást és egyebeket
-    if (typeof init === 'function') {
-        init();
-    }
-    
-    // Majd beállítjuk a nyelvet (ez meg fogja hívni a renderGallery-t is)
-    setLanguage(savedLang);
-});
+	document.addEventListener('DOMContentLoaded', () => {
+		init();
+    	const savedLang = localStorage.getItem('selectedLang') || 'en';
+		setLanguage(savedLang);
+	});
 
 if (isLightboxOpen) {
     updateLightboxContent();
