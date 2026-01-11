@@ -1593,4 +1593,45 @@ img {
     object-fit: contain; 
 }  
 
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  :root {
+    --space-32: 20px; /* Kisebb margók mobilon */
+    --font-size-base: 16px; /* Mobilon kicsit nagyobb betű a jobb olvashatóságért */
+  }
+
+  .container {
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+    width: 100%;
+  }
+
+  /* Gombok mobilon: kényelmesebb érintés */
+  .btn {
+    width: 100%; /* Mobilon a gombok töltsék ki a szélességet */
+    padding: var(--space-12) var(--space-20);
+    font-size: 16px;
+  }
+
+  /* Egymás melletti elemek (pl. kártyák) egymás alá kerüljenek */
+  .grid, .row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  /* Címsorok finomítása */
+  h1 {
+    line-height: 1.2;
+    margin-bottom: var(--space-20);
+  }
+}
+
+/* Képkezelés, hogy ne lógjanak ki */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 }
