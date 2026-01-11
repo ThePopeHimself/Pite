@@ -1234,42 +1234,53 @@ img {
 }
 
 /* About Section */
+.about__content {
+    display: block; /* Alapértelmezett (mobil) elrendezés */
+}
+
 .about__image {
-  display: block;
-  width: 100%;
-  z-index: 10;
+    display: block;
+    width: 100%;
+    z-index: 10;
+    margin-bottom: var(--space-32, 20px);
 }
 
-/* 2. PC NÉZET - Csak itt legyen sticky */
-@media (min-width: 1024px) {
-  .about__image {
-    position: -webkit-sticky; /* Safari miatt */
-    position: sticky;
-    /* Fontos: ellenőrizd, hogy a --header-height létezik-e, 
-       ha nem biztos, írj helyette fix értéket, pl: 80px */
-    top: calc(var(--header-height, 70px) + 20px);
-  }
-}
-
-/* 3. IPHONE / MOBIL JAVÍTÁS (Max 1023px-ig) */
-@media (max-width: 1023px) {
-  .about__image {
-    /* A 'static' teljesen kikapcsolja a sticky-t és a top-ot */
-    position: static !important; 
-    margin-bottom: var(--space-32);
-    transform: none !important; /* Bármilyen parallax scriptet is kiüt */
-  }
-
-  .about__content {
-    /* Kikényszerítjük, hogy ne gridként, hanem egyszerű blokként viselkedjen */
-    display: block !important; 
-  }
-  
-  .about__img {
-    /* Biztosítjuk, hogy ne legyen túlméretezve */
-    max-width: 100%;
+.about__img {
+    width: 100%;
     height: auto;
-  }
+    display: block;
+}
+
+/* --- PC NÉZET (1024px felett) --- */
+@media (min-width: 1024px) {
+    .about__content {
+        display: flex;         /* PC-n egymás mellé teszi a képet és szöveget */
+        align-items: flex-start;
+        gap: 60px;             /* Távolság a kép és a szöveg között */
+    }
+
+    .about__image {
+        flex: 0 0 40%;         /* A kép a szélesség 40%-át foglalja el */
+        position: sticky;
+        top: calc(var(--header-height, 70px) + 20px);
+        margin-bottom: 0;      /* Itt már nem kell az alsó margó */
+    }
+
+    .about__text {
+        flex: 1;               /* A szöveg kitölti a maradék helyet */
+    }
+}
+
+/* --- IPHONE / MOBIL SPECIFIKUS (1023px alatt) --- */
+@media (max-width: 1023px) {
+    .about__image {
+        position: static !important;
+        transform: none !important;
+    }
+    
+    .about__content {
+        display: block !important;
+    }
 }
 /* Contact Section */
 .contact {
