@@ -384,11 +384,12 @@ function setupEntranceAnimations() {
     }
 }
 
+// 1. A javított setLanguage függvény
 function setLanguage(lang) {
-    // 1. Elmentjük a választott nyelvet a böngészőbe
+    // Elmentjük a választott nyelvet
     localStorage.setItem('selectedLang', lang);
 
-    // 2. Lefordítjuk a fix szövegeket (amiknél data-en/data-de attribútum van)
+    // Lefordítjuk a fix szövegeket (Nav, About, stb.)
     const elements = document.querySelectorAll('.lang-text');
     elements.forEach(el => {
         const translation = el.getAttribute('data-' + lang);
@@ -397,35 +398,37 @@ function setLanguage(lang) {
         }
     });
 
-	renderGallery();
-	
-	// 4. Ha a Lightbox épp nyitva van, azt is frissítjük azonnal
+    // Frissítjük a Galériát (hogy a címek és technikák is váltsanak)
+    if (typeof renderGallery === 'function') {
+        renderGallery();
+    }
+    
+    // Ha a Lightbox épp nyitva van, azt is frissítjük azonnal
     if (typeof isLightboxOpen !== 'undefined' && isLightboxOpen) {
-        updateLightboxContent();
+        if (typeof updateLightboxContent === 'function') {
+            updateLightboxContent();
+        }
     }
 
-    // 5. Gombok aktív állapotának kezelése (vizuális visszajelzés)
+    // Gombok aktív állapotának kezelése
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById('btn-' + lang);
     if (activeBtn) activeBtn.classList.add('active');
 }
 
-    // Nyelv elmentése
-    localStorage.setItem('selectedLang', lang);
-}
-
-// Oldal betöltésekor az elmentett nyelv alkalmazása
+// 2. Egységesített indítás az oldal betöltésekor
 document.addEventListener('DOMContentLoaded', () => {
+    // Megnézzük mi volt az elmentett nyelv, vagy alapértelmezett az angol
     const savedLang = localStorage.getItem('selectedLang') || 'en';
+    
+    // Először elindítjuk az alap galéria generálást és egyebeket
+    if (typeof init === 'function') {
+        init();
+    }
+    
+    // Majd beállítjuk a nyelvet (ez meg fogja hívni a renderGallery-t is)
     setLanguage(savedLang);
 });
-
-// Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
 
 if (isLightboxOpen) {
     updateLightboxContent();
