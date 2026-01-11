@@ -1634,4 +1634,40 @@ img {
   display: block;
 }
 
+* --- CONTACT CENTER FIX --- */
+.contact__content {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.contact__info {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+.contact__social {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 20px !important;
+    margin-top: 30px !important;
+}
+
+.contact__social-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 48px !important;
+    height: 48px !important;
+    background-color: #333 !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    transition: transform 0.3s ease !important;
+}
+
 }
