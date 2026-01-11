@@ -44,18 +44,18 @@
   --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
 
   /* Semantic Color Tokens (Light Mode) */
-  --color-background: var(--color-cream-50);
-  --color-surface: var(--color-cream-100);
-  --color-text: var(--color-slate-900);
-  --color-text-secondary: var(--color-slate-500);
-  --color-primary: var(--color-teal-500);
-  --color-primary-hover: var(--color-teal-600);
-  --color-primary-active: var(--color-teal-700);
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text: #f5f5f5;
+  --color-text-secondary: #a7a9a9;
+  --color-primary: var(--color-teal-300);
+  --color-primary-hover: var(--color-teal-400);
+  --color-primary-active: var(--color-teal-300);
   --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
   --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
   --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
   --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
+  --color-btn-primary-text: #121212;
   --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
   --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
   --color-error: var(--color-red-500);
@@ -80,9 +80,7 @@
   --color-info-rgb: 98, 108, 113;
 
   /* Typography */
-  --font-family-display: "Stalinist One", cursive; /* Csak a címeknek */
   --font-family-base: "Geist", "Inter", -apple-system, sans-serif; /* Sima szövegnek maradhat a jól olvasható */
-  BlinkMacSystemFont, "Stalinist One", Roboto, sans-serif;
   --font-family-mono: "Berkeley Mono", monospace;
   --font-size-xs: 11px;
   --font-size-sm: 12px;
@@ -270,10 +268,10 @@
   --color-slate-900-rgb: 19, 52, 59;
 
   /* Semantic Color Tokens (Light Mode) */
-  --color-background: var(--color-cream-50);
-  --color-surface: var(--color-cream-100);
-  --color-text: var(--color-slate-900);
-  --color-text-secondary: var(--color-slate-500);
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text: #f5f5f5;
+  --color-text-secondary: #a7a9a9;
   --color-primary: var(--color-teal-500);
   --color-primary-hover: var(--color-teal-600);
   --color-primary-active: var(--color-teal-700);
@@ -309,6 +307,8 @@ html {
 }
 
 body {
+  background-color: var(--color-background);
+  color: var(--color-text);
   margin: 0;
   padding: 0;
 }
@@ -545,8 +545,12 @@ select.form-control {
   background-image: var(--select-caret-dark);
 }
 
-[data-color-scheme="light"] select.form-control {
-  background-image: var(--select-caret-light);
+[data-color-scheme="light"] {
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text: #f5f5f5;
+  --color-text-secondary: #a7a9a9;
+  --color-border: rgba(255, 255, 255, 0.1);
 }
 
 .form-control:focus {
