@@ -469,6 +469,31 @@ pre code {
   cursor: not-allowed;
 }
 
+.lang-switcher {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.lang-link {
+    text-decoration: none;
+    font-size: 24px; /* Itt állíthatod a zászló méretét */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Hover effekt: kicsit megnő és élénkebb lesz */
+.lang-link:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.flag-icon {
+    line-height: 1;
+    display: block;
+}
+
 /* Form elements */
 .form-control {
   display: block;
