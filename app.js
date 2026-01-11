@@ -359,6 +359,31 @@ function setupEntranceAnimations() {
     }
 }
 
+function setLanguage(lang) {
+    // Minden lang-text osztályú elem fordítása
+    const elements = document.querySelectorAll('.lang-text');
+    elements.forEach(el => {
+        const translation = el.getAttribute(`data-${lang}`);
+        if (translation) {
+            el.textContent = translation;
+        }
+    });
+
+    // Gombok aktív állapotának kezelése
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(`btn-${lang}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // Nyelv elmentése
+    localStorage.setItem('selectedLang', lang);
+}
+
+// Oldal betöltésekor az elmentett nyelv alkalmazása
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLang') || 'en';
+    setLanguage(savedLang);
+});
+
 // Initialize when DOM is loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
