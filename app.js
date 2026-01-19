@@ -236,44 +236,27 @@ function setupEventListeners() {
     });
 }
 
-// Görgetési effektusok (rövidített példa)
+// Görgetési effektusok (Javított verzió)
 function setupScrollEffects() {
+    // Görgetés figyelése a megjelenítéshez
     window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollToTopBtn) {
             scrollTop > 500 ? scrollToTopBtn.classList.add('visible') : scrollToTopBtn.classList.remove('visible');
         }
     });
-}
 
-// KATTINTÁS KEZELÉSE
+    // KATTINTÁS KEZELÉSE - Ennek a függvényen BELÜL kell lennie
     if (scrollToTopBtn) {
-        scrollToTopBtn.addEventListener('click', () => {
+        scrollToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
     }
-}
-
-function setupSmoothScrolling() {
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // 1. Megakadályozzuk az azonnali ugrást
-            e.preventDefault();
-            
-            // 2. Megkeressük a célt
-            const targetId = link.getAttribute('href');
-            const target = document.querySelector(targetId);
-            
-            if (target) {
-                // 3. Görgetés a helyére
-                window.scrollTo({ 
-                    top: target.offsetTop - 80, 
-                    behavior: 'smooth' 
-                });
-
+} 
                 // 4. MOBIL MENÜ BEZÁRÁSA (Csak ha mobil nézetben vagyunk)
                 if (window.innerWidth <= 1024) { // Itt érdemes 1024-et írni a tabletek miatt
                     nav.classList.remove('active');
