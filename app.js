@@ -236,9 +236,8 @@ function setupEventListeners() {
     });
 }
 
-// Görgetési effektusok (Javított verzió)
+// --- SCROLL EFFECTS ---
 function setupScrollEffects() {
-    // Görgetés figyelése a megjelenítéshez
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollToTopBtn) {
@@ -246,7 +245,6 @@ function setupScrollEffects() {
         }
     });
 
-    // KATTINTÁS KEZELÉSE - Ennek a függvényen BELÜL kell lennie
     if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -256,13 +254,30 @@ function setupScrollEffects() {
             });
         });
     }
-} 
+}
 
-                // 4. MOBIL MENÜ BEZÁRÁSA (Csak ha mobil nézetben vagyunk)
-                if (window.innerWidth <= 1024) { // Itt érdemes 1024-et írni a tabletek miatt
+// --- SMOOTH SCROLLING ---
+function setupSmoothScrolling() {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const targetId = link.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                window.scrollTo({ 
+                    top: target.offsetTop - 80, 
+                    behavior: 'smooth' 
+                });
+
+                // MOBIL MENÜ BEZÁRÁSA
+                if (window.innerWidth <= 1024) {
                     nav.classList.remove('active');
                     navToggle.classList.remove('active');
-                    isMobileNavOpen = false; // Fontos: a változót is állítsuk vissza!
+                    isMobileNavOpen = false;
                 }
             }
         });
