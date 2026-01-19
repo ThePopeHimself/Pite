@@ -249,28 +249,30 @@ function setupScrollEffects() {
 function setupSmoothScrolling() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
+            // 1. Megakadályozzuk az azonnali ugrást
             e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
+            
+            // 2. Megkeressük a célt
+            const targetId = link.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
             if (target) {
-                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                // 3. Görgetés a helyére
+                window.scrollTo({ 
+                    top: target.offsetTop - 80, 
+                    behavior: 'smooth' 
+                });
+
+                // 4. MOBIL MENÜ BEZÁRÁSA (Csak ha mobil nézetben vagyunk)
+                if (window.innerWidth <= 1024) { // Itt érdemes 1024-et írni a tabletek miatt
+                    nav.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    isMobileNavOpen = false; // Fontos: a változót is állítsuk vissza!
+                }
             }
         });
     });
 }
-
-document.querySelectorAll('.nav__link').forEach(link => {
-  link.addEventListener('click', () => {
-    // Ellenőrizzük, hogy mobil nézetben vagyunk-e (768px alatt)
-    if (window.innerWidth <= 768) {
-      const nav = document.querySelector('.nav');
-      const navToggle = document.querySelector('.nav-toggle');
-
-      // Visszaállítjuk a menüt és a gombot az eredeti (zárt) állapotba
-      nav.classList.remove('active');
-      navToggle.classList.remove('active');
-    }
-  });
-});
 
 // --- START ---
 document.addEventListener('DOMContentLoaded', () => {
