@@ -257,6 +257,7 @@ function setupScrollEffects() {
         });
     }
 } 
+
                 // 4. MOBIL MENÜ BEZÁRÁSA (Csak ha mobil nézetben vagyunk)
                 if (window.innerWidth <= 1024) { // Itt érdemes 1024-et írni a tabletek miatt
                     nav.classList.remove('active');
