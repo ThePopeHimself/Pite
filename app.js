@@ -258,20 +258,18 @@ function setupSmoothScrolling() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav__link');
-    const navMenu = document.querySelector('.nav');
-    const navToggle = document.querySelector('.nav-toggle');
+document.querySelectorAll('.nav__link').forEach(link => {
+  link.addEventListener('click', () => {
+    // Ellenőrizzük, hogy mobil nézetben vagyunk-e (768px alatt)
+    if (window.innerWidth <= 768) {
+      const nav = document.querySelector('.nav');
+      const navToggle = document.querySelector('.nav-toggle');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Megnézzük, hogy a menü épp nyitva van-e (van-e rajta 'active' osztály)
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            }
-        });
-    });
+      // Visszaállítjuk a menüt és a gombot az eredeti (zárt) állapotba
+      nav.classList.remove('active');
+      navToggle.classList.remove('active');
+    }
+  });
 });
 
 // --- START ---
