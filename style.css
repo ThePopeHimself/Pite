@@ -1242,34 +1242,43 @@ img {
   transition: transform var(--duration-slow) var(--ease-standard);
 }
 
-/* Ez akadályozza meg, hogy rácsússzon a szövegre mobilon */
-.lightbox__image, 
-.lightbox .gallery__image {
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100% !important;
-  /* Mobilon korlátozzuk a magasságot, hogy ne takarja el az alatta lévő részt */
-  max-height: 40vh !important; 
-  object-fit: contain !important;
-  display: block !important;
-  position: relative !important; /* Biztosítja, hogy a saját helyén maradjon */
-  margin: 0 auto !important;
-}
-
-/* Biztosítjuk, hogy mobilon a szöveges rész tiszta legyen */
+/* Ez a rész akadályozza meg a szöveg elfedését mobilon */
 @media (max-width: 1023px) {
-  .lightbox__right {
-    position: relative !important;
-    z-index: 10 !important;
-    background: var(--color-surface, #111) !important;
-    padding-top: 20px !important;
-    margin-top: 0 !important; /* Megakadályozza az átfedést */
-  }
-  
-  .lightbox__content {
+  /* Kényszerítjük a függőleges elrendezést, hogy ne legyen átfedés */
+  .lightbox__content,
+  .lightbox__split-layout {
     display: flex !important;
     flex-direction: column !important;
-    overflow-y: auto !important;
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+
+  .lightbox__left {
+    position: relative !important;
+    width: 100% !important;
+    height: 40vh !important; /* A kép magassága limitált */
+    flex: none !important;
+  }
+
+  .lightbox .gallery__image, 
+  .lightbox__image {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 40vh !important;
+    object-fit: contain !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .lightbox__right {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    background: #111 !important; /* Legyen háttere, hogy ne látsszunk át */
+    padding: 20px !important;
+    z-index: 10 !important; /* A szöveg a kép "fölé" kerül a rétegrendben, ha mégis találkoznának */
   }
 }
 /* --------------------- */
