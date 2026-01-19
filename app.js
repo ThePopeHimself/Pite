@@ -246,6 +246,17 @@ function setupScrollEffects() {
     });
 }
 
+// KATTINTÁS KEZELÉSE
+    if (scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
 function setupSmoothScrolling() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
